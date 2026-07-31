@@ -1449,3 +1449,229 @@ function drawFireflies() {
 
   context.restore();
 }
+// ============================================================
+// Layer 14 — ホタルが現れる
+// ============================================================
+
+const layer14Fireflies = [];
+
+function createLayer14Fireflies() {
+    layer14Fireflies.length = 0;
+
+    const fireflyCount = Math.max(
+        12,
+        Math.floor(getCanvasWidth() / 90)
+    );
+
+    for (let i = 0; i < fireflyCount; i++) {
+        const x = Math.random() * getCanvasWidth();
+        const y =
+            getCanvasHeight() * 0.35 +
+            Math.random() * getCanvasHeight() * 0.55;
+
+        layer14Fireflies.push({
+            x,
+            y,
+            baseX: x,
+            baseY: y,
+
+            radius: 1.4 + Math.random() * 1.8,
+
+            pulsePhase: Math.random() * Math.PI * 2,
+            pulseSpeed: 0.018 + Math.random() * 0.025,
+
+            driftPhase: Math.random() * Math.PI * 2,
+            driftSpeed: 0.002 + Math.random() * 0.004,
+
+            horizontalRange: 14 + Math.random() * 28,
+            verticalRange: 8 + Math.random() * 18,
+
+            directionX: Math.random() < 0.5 ? -1 : 1,
+
+            wingPhase: Math.random() * Math.PI * 2,
+            wingSpeed: 0.12 + Math.random() * 0.08,
+
+            opacity: 0,
+            targetOpacity: 0.45 + Math.random() * 0.5,
+
+            delay: Math.floor(Math.random() * 500),
+            age: 0
+        });
+    }
+}
+
+function drawLayer14Fireflies() {
+    context.save();
+
+    for (const firefly of layer14Fireflies) {
+        firefly.age += 1;
+
+        if (firefly.age < firefly.delay) {
+            continue;
+        }
+
+        firefly.pulsePhase += firefly.pulseSpeed;
+        firefly.driftPhase += firefly.driftSpeed;
+        firefly.wingPhase += firefly.wingSpeed;
+
+        firefly.baseX += 0.035 * firefly.directionX;
+
+        if (firefly.baseX < -40) {
+            firefly.baseX = -40;
+            firefly.directionX = 1;
+        }
+
+        if (firefly.baseX > getCanvasWidth() + 40) {
+            firefly.baseX = getCanvasWidth() + 40;
+            firefly.directionX = -1;
+        }
+
+        firefly.x =
+            firefly.baseX +
+            Math.sin(firefly.driftPhase * 2.1) *
+                firefly.horizontalRange;
+
+        firefly.y =
+            firefly.baseY +
+            Math.cos(firefly.driftPhase * 1.6) *
+                firefly.verticalRange +
+            Math.sin(firefly.pulsePhase * 0.7) * 3;
+
+        if (firefly.opacity < firefly.targetOpacity) {
+            firefly.opacity = Math.min(
+                firefly.targetOpacity,
+                firefly.opacity + 0.006
+            );
+        }
+
+        const pulse =
+            0.35 +
+            ((Math.sin(firefly.pulsePhase) + 1) / 2) * 0.65;
+
+        const glowOpacity = firefly.opacity * pulse;
+
+        const wingOpen =
+            0.5 +
+            Math.abs(Math.sin(firefly.wingPhase)) * 0.8;
+
+        context.save();
+        context.translate(firefly.x, firefly.y);
+
+        // 左の羽
+        context.shadowBlur = 0;
+        context.fillStyle =
+            `rgba(225,240,210,${0.16 * firefly.opacity})`;
+
+        context.beginPath();
+        context.ellipse(
+            -firefly.radius * 1.25,
+            -firefly.radius * 0.25,
+            firefly.radius * 1.45,
+            firefly.radius * 0.55 * wingOpen,
+            -0.45,
+            0,
+            Math.PI * 2
+        );
+        context.fill();
+
+        // 右の羽
+        context.beginPath();
+        context.ellipse(
+            firefly.radius * 1.25,
+            -firefly.radius * 0.25,
+            firefly.radius * 1.45,
+            firefly.radius * 0.55 * wingOpen,
+            0.45,
+            0,
+            Math.PI * 2
+        );
+        context.fill();
+
+        // 胴体
+        context.fillStyle =
+            `rgba(45,38,24,${0.72 * firefly.opacity})`;
+
+        context.beginPath();
+        context.ellipse(
+            0,
+            0,
+            firefly.radius * 0.65,
+            firefly.radius * 1.45,
+            0,
+            0,
+            Math.PI * 2
+        );
+        context.fill();
+
+        // 発光
+        const glowY = firefly.radius * 0.85;
+
+        const glowGradient = context.createRadialGradient(
+            0,
+            glowY,
+            0,
+            0,
+            glowY,
+            firefly.radius * 7
+        );
+
+        glowGradient.addColorStop(
+            0,
+            `rgba(255,255,185,${glowOpacity})`
+        );
+
+        glowGradient.addColorStop(
+            0.25,
+            `rgba(235,255,125,${glowOpacity * 0.65})`
+        );
+
+        glowGradient.addColorStop(
+            0.6,
+            `rgba(190,245,75,${glowOpacity * 0.22})`
+        );
+
+        glowGradient.addColorStop(
+            1,
+            "rgba(170,230,60,0)"
+        );
+
+        context.fillStyle = glowGradient;
+
+        context.beginPath();
+        context.arc(
+            0,
+            glowY,
+            firefly.radius * 7,
+            0,
+            Math.PI * 2
+        );
+        context.fill();
+
+        // 発光部分の中心
+        context.shadowColor = "rgba(245,255,145,1)";
+        context.shadowBlur = 10 + pulse * 16;
+
+        context.fillStyle =
+            `rgba(255,255,185,${Math.min(
+                1,
+                glowOpacity + 0.25
+            )})`;
+
+        context.beginPath();
+        context.arc(
+            0,
+            glowY,
+            firefly.radius,
+            0,
+            Math.PI * 2
+        );
+        context.fill();
+
+        context.restore();
+    }
+
+    context.restore();
+}
+
+// Layer 14のデータを作成
+createLayer14Fireflies();
