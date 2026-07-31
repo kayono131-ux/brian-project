@@ -1,0 +1,395 @@
+d:root {
+  --white: #ffffff;
+  --glass: rgba(8, 18, 27, 0.58);
+  --glass-border: rgba(255, 255, 255, 0.24);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  overflow: hidden;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  color: var(--white);
+  background: #111b23;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.world-card {
+  position: relative;
+  width: min(1240px, 100%);
+  height: min(790px, 94vh);
+  overflow: hidden;
+  border-radius: 32px;
+  isolation: isolate;
+  background: #172431;
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.35),
+    0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.world-image {
+  position: absolute;
+  inset: -3%;
+  z-index: -10;
+  width: 106%;
+  height: 106%;
+  object-fit: cover;
+  transform: scale(1.04);
+  filter:
+    blur(9px)
+    brightness(0.42)
+    saturate(0.55)
+    contrast(1.08);
+  transition:
+    filter 1.2s ease,
+    transform 1.2s ease;
+}
+
+#weatherCanvas {
+  position: absolute;
+  inset: 0;
+  z-index: -5;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.dark-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -4;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(8, 12, 24, 0.82),
+      rgba(14, 27, 38, 0.46) 50%,
+      rgba(6, 14, 23, 0.62)
+    );
+  transition:
+    opacity 1.2s ease,
+    background 1.2s ease;
+}
+
+.sun-light {
+  position: absolute;
+  z-index: -3;
+  top: -18%;
+  right: -12%;
+  width: 72%;
+  aspect-ratio: 1;
+  pointer-events: none;
+  opacity: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 250, 206, 0.86) 0%,
+      rgba(255, 220, 132, 0.42) 28%,
+      rgba(255, 221, 143, 0.13) 54%,
+      transparent 72%
+    );
+  filter: blur(12px);
+  transform: scale(0.72);
+  transition:
+    opacity 1.8s ease,
+    transform 1.8s ease;
+}
+
+.sun-light.is-visible {
+  opacity: 1;
+  transform: scale(1);
+  animation: breatheSun 4s ease-in-out infinite;
+}
+
+.rainbow {
+  position: absolute;
+  z-index: -2;
+  top: 11%;
+  left: 13%;
+  width: 74%;
+  height: 48%;
+  pointer-events: none;
+  opacity: 0;
+  border-radius: 50% 50% 0 0;
+  background:
+    radial-gradient(
+      ellipse at center bottom,
+      transparent 45%,
+      rgba(255, 100, 100, 0.55) 46%,
+      rgba(255, 160, 80, 0.5) 49%,
+      rgba(255, 230, 100, 0.48) 52%,
+      rgba(130, 230, 140, 0.44) 55%,
+      rgba(100, 190, 255, 0.43) 58%,
+      rgba(145, 120, 255, 0.42) 61%,
+      transparent 64%
+    );
+  filter: blur(1px);
+  transform: translateY(24px) scale(0.94);
+  transition:
+    opacity 1.8s ease,
+    transform 1.8s ease;
+}
+
+.rainbow.is-visible {
+  opacity: 0.9;
+  transform: translateY(0) scale(1);
+}
+
+.top-bar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30px;
+}
+
+.eyebrow {
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+h1 {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 500;
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  text-shadow: 0 5px 28px rgba(0, 0, 0, 0.45);
+}
+
+.layer-box {
+  min-width: 118px;
+  padding: 13px 17px;
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  text-align: center;
+  background: rgba(6, 16, 24, 0.42);
+  backdrop-filter: blur(18px);
+}
+
+.layer-box span,
+.layer-box small {
+  display: block;
+  font-size: 12px;
+  opacity: 0.78;
+}
+
+.layer-box strong {
+  display: block;
+  margin: 2px 0;
+  font-size: 39px;
+  font-weight: 500;
+}
+
+.story-panel {
+  position: absolute;
+  z-index: 10;
+  right: 30px;
+  bottom: 190px;
+  left: 30px;
+  max-width: 720px;
+}
+
+.story-panel p {
+  margin-bottom: 8px;
+  font-size: clamp(25px, 3.4vw, 43px);
+  font-weight: 600;
+  line-height: 1.07;
+  text-shadow: 0 5px 28px rgba(0, 0, 0, 0.65);
+}
+
+.story-panel span {
+  display: block;
+  max-width: 660px;
+  font-size: clamp(15px, 1.6vw, 20px);
+  line-height: 1.45;
+  opacity: 0.94;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.72);
+}
+
+.controls {
+  position: absolute;
+  z-index: 20;
+  right: 30px;
+  bottom: 28px;
+  left: 30px;
+  padding: 18px 22px 20px;
+  border: 1px solid var(--glass-border);
+  border-radius: 23px;
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+}
+
+.progress-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+input[type="range"] {
+  width: 100%;
+  height: 24px;
+  cursor: pointer;
+  accent-color: white;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+button {
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 14px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.primary-button {
+  color: #162128;
+  border: 0;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.primary-button:hover {
+  background: white;
+}
+
+button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+@keyframes breatheSun {
+  0%,
+  100% {
+    filter: blur(12px);
+  }
+
+  50% {
+    filter: blur(18px);
+  }
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    padding: 0;
+  }
+
+  .world-card {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .top-bar {
+    padding: 22px;
+  }
+
+  .story-panel {
+    right: 22px;
+    bottom: 225px;
+    left: 22px;
+  }
+
+  .controls {
+    right: 14px;
+    bottom: 14px;
+    left: 14px;
+  }
+
+  .button-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .primary-button {
+    grid-column: 1 / -1;
+  }
+}
+/* =========================================================
+   BLOOM ENGINE — STEP 2
+   Layers 7–12
+   ========================================================= */
+
+.world-card.story-change {
+  animation: storyPulse 0.7s ease;
+}
+
+.story-panel.story-change {
+  animation: storyTextArrival 0.75s ease;
+}
+
+@keyframes storyPulse {
+  0% {
+    box-shadow:
+      0 30px 90px rgba(0, 0, 0, 0.35),
+      0 8px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  45% {
+    box-shadow:
+      0 30px 100px rgba(255, 244, 178, 0.27),
+      0 8px 38px rgba(255, 255, 255, 0.18);
+  }
+
+  100% {
+    box-shadow:
+      0 30px 90px rgba(0, 0, 0, 0.35),
+      0 8px 30px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@keyframes storyTextArrival {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

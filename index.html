@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Save for a Gift</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <main class="app-shell">
+    <section id="worldCard" class="world-card">
+      <img
+        id="worldImage"
+        class="world-image"
+        src="assets/images/future-world.png"
+        alt="Brian's evolving world"
+      />
+
+      <canvas id="weatherCanvas"></canvas>
+
+      <div id="darkOverlay" class="dark-overlay"></div>
+      <div id="sunLight" class="sun-light"></div>
+      <div id="rainbow" class="rainbow"></div>
+
+      <header class="top-bar">
+        <div>
+          <p class="eyebrow">Save for a Gift</p>
+          <h1>Brian’s World</h1>
+        </div>
+
+        <div class="layer-box">
+          <span>Layer</span>
+          <strong id="layerNumber">1</strong>
+          <small>/ 40</small>
+        </div>
+      </header>
+
+      <section class="story-panel">
+        <p id="storyTitle">A storm covers the world.</p>
+        <span id="storyDescription">
+          Heavy rain and thunder hide what is waiting underneath.
+        </span>
+      </section>
+
+      <section class="controls">
+        <div class="progress-row">
+          <span>Story progress</span>
+          <strong id="percentText">2.5%</strong>
+        </div>
+
+        <input
+          id="layerSlider"
+          type="range"
+          min="1"
+          max="40"
+          step="1"
+          value="1"
+        />
+
+        <div class="button-row">
+          <button id="previousButton" type="button">
+            Previous
+          </button>
+
+          <button id="resetButton" type="button">
+            Reset
+          </button>
+
+          <button id="nextButton" class="primary-button" type="button">
+            Add one layer
+          </button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
