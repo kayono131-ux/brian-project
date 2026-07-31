@@ -57,7 +57,7 @@ const birds = [];
 const butterflies = [];
 const driftingLeaves = [];
 const lightParticles = [];
-
+const fireflies = [];
 /* ---------------------------------------------------------
    STORY DATA
 --------------------------------------------------------- */
@@ -191,6 +191,7 @@ function resizeCanvas() {
   createButterflies();
   createLeaves();
   createLightParticles();
+   createFireflies();
 }
 
 /* ---------------------------------------------------------
@@ -1344,6 +1345,7 @@ function animate() {
   drawLightningBolt();
 
   drawTreeGlow();
+   drawFireflies();
   drawWaterfallGlow();
   drawLeaves();
   drawFirstFlower();
@@ -1384,3 +1386,66 @@ window.addEventListener("resize", function () {
 resizeCanvas();
 setLayer(1);
 requestAnimationFrame(animate);
+/* =========================================================
+   LAYER 13 — FIREFLIES
+========================================================= */
+
+function createFireflies() {
+  fireflies.length = 0;
+
+  for (let i = 0; i < 45; i += 1) {
+    fireflies.push({
+      x: randomBetween(getCanvasWidth() * 0.15, getCanvasWidth() * 0.85),
+      y: randomBetween(getCanvasHeight() * 0.25, getCanvasHeight() * 0.85),
+      radius: randomBetween(1.5, 3.5),
+      phase: randomBetween(0, Math.PI * 2),
+      speed: randomBetween(0.01, 0.03),
+      driftX: randomBetween(-0.3, 0.3),
+      driftY: randomBetween(-0.2, 0.2)
+    });
+  }
+}
+
+function drawFireflies() {
+  if (currentLayer < 13) {
+    return;
+  }
+
+  context.save();
+
+  for (const firefly of fireflies) {
+    firefly.phase += firefly.speed;
+
+    firefly.x += firefly.driftX;
+    firefly.y += firefly.driftY;
+
+    firefly.x += Math.sin(firefly.phase) * 0.35;
+    firefly.y += Math.cos(firefly.phase) * 0.25;
+
+    if (firefly.x < 0) firefly.x = getCanvasWidth();
+    if (firefly.x > getCanvasWidth()) firefly.x = 0;
+    if (firefly.y < 0) firefly.y = getCanvasHeight();
+    if (firefly.y > getCanvasHeight()) firefly.y = 0;
+
+    const alpha =
+      0.25 + Math.abs(Math.sin(firefly.phase)) * 0.75;
+
+    context.shadowColor = "rgba(255,245,170,1)";
+    context.shadowBlur = 15;
+
+    context.fillStyle =
+  "rgba(255,245,170," + alpha + ")";
+
+    context.beginPath();
+    context.arc(
+      firefly.x,
+      firefly.y,
+      firefly.radius,
+      0,
+      Math.PI * 2
+    );
+    context.fill();
+  }
+
+  context.restore();
+}
