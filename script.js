@@ -1502,7 +1502,7 @@ function createLayer14Fireflies() {
             opacity: 0,
             targetOpacity: 0.45 + Math.random() * 0.5,
 
-            delay: Math.floor(Math.random() * 500),
+            delay: Math.floor(Math.random() * 40),
             age: 0
         });
     }
@@ -1552,7 +1552,7 @@ function drawLayer14Fireflies() {
         if (firefly.opacity < firefly.targetOpacity) {
             firefly.opacity = Math.min(
                 firefly.targetOpacity,
-                firefly.opacity + 0.006
+                firefly.opacity + 0.03
             );
         }
 
@@ -1731,7 +1731,7 @@ function createLayer15Fish() {
             opacity: 0,
             targetOpacity: 0.35 + Math.random() * 0.4,
 
-            delay: Math.floor(Math.random() * 600),
+            delay: Math.floor(Math.random() * 40),
 
             colorType: Math.floor(Math.random() * 4),
 
@@ -1780,7 +1780,7 @@ function drawLayer15Fish() {
         if (fish.opacity < fish.targetOpacity) {
             fish.opacity = Math.min(
                 fish.targetOpacity,
-                fish.opacity + 0.004
+                fish.opacity + 0.02
             );
         }
 
@@ -2121,12 +2121,11 @@ function createLayer16Flowers() {
                 0,
 
             bloomSpeed:
-                0.0025 + Math.random() * 0.004,
+                0.02 + Math.random() * 0.02,
 
             delay:
                 Math.floor(
-                    Math.random() * 650 +
-                    (1 - depth) * 180
+                    Math.random() * 40
                 ),
 
             opacity:
@@ -2180,7 +2179,7 @@ function drawLayer16Flowers() {
         if (flower.opacity < flower.targetOpacity) {
             flower.opacity = Math.min(
                 flower.targetOpacity,
-                flower.opacity + 0.004
+                flower.opacity + 0.02
             );
         }
 
@@ -2590,8 +2589,7 @@ function createLayer17Animals() {
 
             delay:
                 Math.floor(
-                    120 +
-                    Math.random() * 700
+                    Math.random() * 40
                 ),
 
             opacity: 0,
@@ -2600,8 +2598,7 @@ function createLayer17Animals() {
                 0.42 + depth * 0.38,
 
             appearSpeed:
-                0.0025 +
-                Math.random() * 0.003,
+                0.02 + Math.random() * 0.02,
 
             breathPhase:
                 Math.random() * Math.PI * 2,
@@ -2697,8 +2694,7 @@ function createLayer17Animals() {
 
             delay:
                 Math.floor(
-                    250 +
-                    Math.random() * 850
+                    Math.random() * 40
                 ),
 
             opacity: 0,
@@ -2707,8 +2703,7 @@ function createLayer17Animals() {
                 0.45 + depth * 0.42,
 
             appearSpeed:
-                0.003 +
-                Math.random() * 0.0035,
+                0.02 + Math.random() * 0.02,
 
             breathPhase:
                 Math.random() * Math.PI * 2,
@@ -3907,11 +3902,10 @@ function createLayer18Seeds() {
                 0.35 + Math.random() * 0.5,
 
             appearSpeed:
-                0.0025 + Math.random() * 0.004,
-
+                0.02 + Math.random() * 0.02,
             delay:
                 Math.floor(
-                    Math.random() * 700
+                    Math.random() * 40
                 ),
 
             age: 0
@@ -4283,12 +4277,11 @@ function createLayer19Trees() {
             growth: 0,
 
             growthSpeed:
-                0.0015 +
-                Math.random() * 0.0025,
+                0.012 + Math.random() * 0.012,
 
             delay:
                 Math.floor(
-                    Math.random() * 700
+                    Math.random() * 40
                 ),
 
             opacity: 0,
@@ -4370,7 +4363,7 @@ function drawLayer19Trees() {
         ) {
             tree.opacity = Math.min(
                 tree.targetOpacity,
-                tree.opacity + 0.003
+                tree.opacity + 0.02
             );
         }
 
@@ -4882,8 +4875,7 @@ function createLayer20Atmosphere() {
                       Math.random() * 0.24,
 
             appearSpeed:
-                0.0015 +
-                Math.random() * 0.003,
+                0.02 + Math.random() * 0.02,
 
             pulsePhase:
                 Math.random() *
@@ -4945,7 +4937,7 @@ function createLayer20Atmosphere() {
 
             delay:
                 Math.floor(
-                    Math.random() * 850
+                    Math.random() * 40
                 ),
 
             age: 0
@@ -5011,8 +5003,7 @@ function createLayer20Atmosphere() {
                 Math.random() * 0.025,
 
             appearSpeed:
-                0.0008 +
-                Math.random() * 0.0015,
+                0.01 + Math.random() * 0.01,
 
             speed:
                 0.035 +
@@ -5042,8 +5033,7 @@ function createLayer20Atmosphere() {
 
             delay:
                 Math.floor(
-                    300 +
-                    Math.random() * 900
+                    Math.random() * 40
                 ),
 
             age: 0
@@ -5130,8 +5120,7 @@ function createLayer20Atmosphere() {
                 Math.random() * 0.065,
 
             appearSpeed:
-                0.001 +
-                Math.random() * 0.002,
+                0.015 + Math.random() * 0.015,
 
             pulsePhase:
                 Math.random() *
@@ -5168,8 +5157,7 @@ function createLayer20Atmosphere() {
 
             delay:
                 Math.floor(
-                    450 +
-                    Math.random() * 850
+                    Math.random() * 40
                 ),
 
             age: 0
