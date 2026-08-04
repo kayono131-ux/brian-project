@@ -6005,4 +6005,4 @@ function drawLayer20MistGlow(
 }
 
 // Layer 20のデータを作成
-createLayer20Atmosphere();
+createLayer20Atmosphere()
