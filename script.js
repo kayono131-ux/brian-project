@@ -4322,6 +4322,28 @@ function createLayer19Trees() {
                     Math.random() * 3
                 ),
 
+            clusters: (() => {
+                const clusterCount =
+                    8 + Math.floor(depth * 7);
+
+                const clusterList = [];
+
+                for (
+                    let clusterIndex = 0;
+                    clusterIndex < clusterCount;
+                    clusterIndex += 1
+                ) {
+                    clusterList.push({
+                        radiusXRatio:
+                            0.2 + Math.random() * 0.28,
+                        radiusYRatio:
+                            0.22 + Math.random() * 0.28
+                    });
+                }
+
+                return clusterList;
+            })(),
+
             age: 0
         });
     }
@@ -4681,19 +4703,15 @@ function drawLayer19Crown(
                 clusterCount +
             tree.branchSeed;
 
+        const clusterInfo = tree.clusters[i];
+
         const radiusX =
             crownWidth *
-            (
-                0.2 +
-                Math.random() * 0.28
-            );
+            clusterInfo.radiusXRatio;
 
         const radiusY =
             crownHeight *
-            (
-                0.22 +
-                Math.random() * 0.28
-            );
+            clusterInfo.radiusYRatio;
 
         const clusterX =
             topX +
@@ -6005,4 +6023,4 @@ function drawLayer20MistGlow(
 }
 
 // Layer 20のデータを作成
-createLayer20Atmosphere()
+createLayer20Atmosphere();
