@@ -1352,6 +1352,14 @@ function animate() {
   drawButterflies();
   drawBirds();
 
+  drawLayer14Fireflies();
+  drawLayer15Fish();
+  drawLayer16Flowers();
+  drawLayer17Animals();
+  drawLayer18Seeds();
+  drawLayer19Trees();
+  drawLayer20Atmosphere();
+
   requestAnimationFrame(animate);
 }
 
@@ -1501,6 +1509,10 @@ function createLayer14Fireflies() {
 }
 
 function drawLayer14Fireflies() {
+    if (currentLayer < 14) {
+        return;
+    }
+
     context.save();
 
     for (const firefly of layer14Fireflies) {
@@ -1729,6 +1741,10 @@ function createLayer15Fish() {
 }
 
 function drawLayer15Fish() {
+    if (currentLayer < 15) {
+        return;
+    }
+
     context.save();
 
     for (const fish of layer15Fish) {
@@ -2139,6 +2155,10 @@ function createLayer16Flowers() {
 }
 
 function drawLayer16Flowers() {
+    if (currentLayer < 16) {
+        return;
+    }
+
     context.save();
 
     for (const flower of layer16Flowers) {
@@ -2760,6 +2780,10 @@ function updateLayer17AnimalBlink(animal) {
 }
 
 function drawLayer17Animals() {
+    if (currentLayer < 17) {
+        return;
+    }
+
     context.save();
 
     for (const animal of layer17Animals) {
@@ -3896,6 +3920,10 @@ function createLayer18Seeds() {
 }
 
 function drawLayer18Seeds() {
+    if (currentLayer < 18) {
+        return;
+    }
+
     context.save();
 
     for (const seed of layer18Seeds) {
@@ -4207,7 +4235,8 @@ function drawLayer18WingedSeed(seed) {
 }
 
 // Layer 18のデータを作成
-cr// ============================================================
+createLayer18Seeds();
+// ============================================================
 // Layer 19 — 木々がさらに成長し、森が深くなる
 // ============================================================
 
@@ -4311,6 +4340,10 @@ function createLayer19Trees() {
 }
 
 function drawLayer19Trees() {
+    if (currentLayer < 19) {
+        return;
+    }
+
     context.save();
 
     for (const tree of layer19Trees) {
@@ -4751,7 +4784,7 @@ function drawLayer19Crown(
 }
 
 // Layer 19のデータを作成
-createLayer19Trees();eateLayer18Seeds();
+createLayer19Trees();
 // ============================================================
 // Layer 20-A — 世界全体が生命に満ち、空気まで輝く
 // 大気の光・生命のオーラ粒子
@@ -5333,6 +5366,10 @@ function updateLayer20LifeGlow(
 // ============================================================
 
 function drawLayer20Atmosphere() {
+    if (currentLayer < 20) {
+        return;
+    }
+
     context.save();
 
     context.globalCompositeOperation =
