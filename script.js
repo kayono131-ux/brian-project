@@ -133,6 +133,54 @@ const stories = {
     title: "The great tree begins to glow.",
     description:
       "A warm light awakens inside the heart of the world."
+  },
+
+  13: {
+    title: "Light begins to rise from the ground.",
+    description:
+      "Soft motes of light drift upward through the warm air."
+  },
+
+  14: {
+    title: "Fireflies gather at dusk.",
+    description:
+      "Tiny lanterns blink on, one by one, across the meadow."
+  },
+
+  15: {
+    title: "Fish appear beneath the water.",
+    description:
+      "Quiet shapes glide through the cool, clear current."
+  },
+
+  16: {
+    title: "The meadow fills with flowers.",
+    description:
+      "Color spreads across the ground in every direction."
+  },
+
+  17: {
+    title: "The animals return.",
+    description:
+      "Deer and rabbits step out to greet the waking world."
+  },
+
+  18: {
+    title: "Seeds drift on the wind.",
+    description:
+      "New beginnings float gently toward open ground."
+  },
+
+  19: {
+    title: "The forest grows full.",
+    description:
+      "Young trees rise together, filling the horizon with green."
+  },
+
+  20: {
+    title: "The world feels alive.",
+    description:
+      "Light, color, and life settle into a warm, steady glow."
   }
 };
 
@@ -1705,8 +1753,8 @@ function createLayer15Fish() {
         const direction = Math.random() < 0.5 ? -1 : 1;
 
         const baseY =
-            getCanvasHeight() * 0.68 +
-            Math.random() * getCanvasHeight() * 0.18;
+            getCanvasHeight() * 0.58 +
+            Math.random() * getCanvasHeight() * 0.14;
 
         const size = 5 + Math.random() * 7;
 
@@ -1766,15 +1814,15 @@ function drawLayer15Fish() {
         if (fish.direction === 1 && fish.x > getCanvasWidth() + 40) {
             fish.x = -40;
             fish.baseY =
-                getCanvasHeight() * 0.68 +
-                Math.random() * getCanvasHeight() * 0.18;
+                getCanvasHeight() * 0.58 +
+                Math.random() * getCanvasHeight() * 0.14;
         }
 
         if (fish.direction === -1 && fish.x < -40) {
             fish.x = getCanvasWidth() + 40;
             fish.baseY =
-                getCanvasHeight() * 0.68 +
-                Math.random() * getCanvasHeight() * 0.18;
+                getCanvasHeight() * 0.58 +
+                Math.random() * getCanvasHeight() * 0.14;
         }
 
         if (fish.opacity < fish.targetOpacity) {
@@ -2068,8 +2116,8 @@ function createLayer16Flowers() {
         const depth = Math.random();
 
         const baseY =
-            canvasHeight * 0.62 +
-            depth * canvasHeight * 0.34;
+            canvasHeight * 0.55 +
+            depth * canvasHeight * 0.19;
 
         const size =
             1.8 +
@@ -2562,8 +2610,8 @@ function createLayer17Animals() {
             18 + depth * 19;
 
         const baseY =
-            canvasHeight * 0.66 +
-            depth * canvasHeight * 0.25;
+            canvasHeight * 0.48 +
+            depth * canvasHeight * 0.24;
 
         const x =
             canvasWidth *
@@ -2660,8 +2708,8 @@ function createLayer17Animals() {
             7 + depth * 9;
 
         const baseY =
-            canvasHeight * 0.68 +
-            depth * canvasHeight * 0.25;
+            canvasHeight * 0.5 +
+            depth * canvasHeight * 0.22;
 
         const x =
             canvasWidth *
@@ -4251,8 +4299,8 @@ function createLayer19Trees() {
         const depth = Math.random();
 
         const baseY =
-            canvasHeight * 0.47 +
-            depth * canvasHeight * 0.42;
+            canvasHeight * 0.4 +
+            depth * canvasHeight * 0.32;
 
         const height =
             70 +
