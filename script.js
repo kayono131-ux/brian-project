@@ -181,6 +181,126 @@ const stories = {
     title: "The world feels alive.",
     description:
       "Light, color, and life settle into a warm, steady glow."
+  },
+
+  21: {
+    title: "Tall wildflowers sway in the breeze.",
+    description:
+      "New blossoms rise above the grass, reaching for the light."
+  },
+
+  22: {
+    title: "The forest grows denser.",
+    description:
+      "More trees fill the gaps, and the woods feel deeper and quieter."
+  },
+
+  23: {
+    title: "Mushrooms peek through the undergrowth.",
+    description:
+      "Small clusters appear at the feet of the oldest trees."
+  },
+
+  24: {
+    title: "A bird's nest is built.",
+    description:
+      "Woven twigs cradle a few small eggs, high in the branches."
+  },
+
+  25: {
+    title: "The morning sun breaks through.",
+    description:
+      "A warm glow spreads across the sky, gentle and golden."
+  },
+
+  26: {
+    title: "Cloud shadows drift across the land.",
+    description:
+      "Soft shapes glide silently over the meadow below."
+  },
+
+  27: {
+    title: "Sunlight scatters through the leaves.",
+    description:
+      "Small flickers of light dance on the forest floor."
+  },
+
+  28: {
+    title: "More butterflies take flight.",
+    description:
+      "The air fills with color as new wings join the dance."
+  },
+
+  29: {
+    title: "Flower petals drift on the wind.",
+    description:
+      "Soft pink petals swirl gently through the open air."
+  },
+
+  30: {
+    title: "The water begins to shimmer.",
+    description:
+      "Sunlight catches the surface, scattering tiny points of light."
+  },
+
+  31: {
+    title: "A shooting star crosses the sky.",
+    description:
+      "A brief streak of light reminds the world to keep wishing."
+  },
+
+  32: {
+    title: "An aurora ripples overhead.",
+    description:
+      "Soft ribbons of color drift silently across the sky."
+  },
+
+  33: {
+    title: "The trees begin to glow.",
+    description:
+      "A warm light gathers in the branches, like held breath."
+  },
+
+  34: {
+    title: "A seasonal wind moves through the world.",
+    description:
+      "Leaves and petals swirl together, carried by the breeze."
+  },
+
+  35: {
+    title: "The forest breathes with life.",
+    description:
+      "A quiet pulse of green light moves through every tree."
+  },
+
+  36: {
+    title: "Beams of light bless the world.",
+    description:
+      "Soft columns of light fall gently from the sky."
+  },
+
+  37: {
+    title: "The stars begin to appear.",
+    description:
+      "One by one, tiny lights awaken in the darkening sky."
+  },
+
+  38: {
+    title: "A golden mist settles over everything.",
+    description:
+      "Warm haze drifts low across the land, soft and quiet."
+  },
+
+  39: {
+    title: "The world reaches full bloom.",
+    description:
+      "Every flower and every light shines at its brightest."
+  },
+
+  40: {
+    title: "The world is complete.",
+    description:
+      "Everything Brian imagined now lives here, warm and whole."
   }
 };
 
@@ -1408,6 +1528,27 @@ function animate() {
   drawLayer19Trees();
   drawLayer20Atmosphere();
 
+  drawLayer21WildFlowers();
+  drawLayer22DenseTrees();
+  drawLayer23Mushrooms();
+  drawLayer24Nests();
+  drawLayer25Sunrise();
+  drawLayer26CloudShadows();
+  drawLayer27DappledLight();
+  drawLayer28Butterflies();
+  drawLayer29Petals();
+  drawLayer30WaterSparkles();
+  drawLayer31ShootingStars();
+  drawLayer32Aurora();
+  drawLayer33GlowingTrees();
+  drawLayer34WindGusts();
+  drawLayer35ForestLife();
+  drawLayer36Blessing();
+  drawLayer37Stars();
+  drawLayer38GoldMist();
+  drawLayer39Bursts();
+  drawLayer40Finale();
+
   requestAnimationFrame(animate);
 }
 
@@ -1433,6 +1574,29 @@ layerSlider.addEventListener("input", function () {
 
 window.addEventListener("resize", function () {
   resizeCanvas();
+  createLayer14Fireflies();
+  createLayer15Fish();
+  createLayer16Flowers();
+  createLayer17Animals();
+  createLayer18Seeds();
+  createLayer19Trees();
+  createLayer20Atmosphere();
+  createLayer21WildFlowers();
+  createLayer22DenseTrees();
+  createLayer23Mushrooms();
+  createLayer24Nests();
+  createLayer26CloudShadows();
+  createLayer27DappledLight();
+  createLayer28Butterflies();
+  createLayer29Petals();
+  createLayer30WaterSparkles();
+  createLayer31ShootingStars();
+  createLayer34WindGusts();
+  createLayer36Blessing();
+  createLayer37Stars();
+  createLayer38GoldMist();
+  createLayer39Bursts();
+  createLayer40Finale();
 });
 
 /* ---------------------------------------------------------
@@ -6072,3 +6236,1717 @@ function drawLayer20MistGlow(
 
 // Layer 20のデータを作成
 createLayer20Atmosphere();
+
+// ============================================================
+// Layer 21 — 丈の高い野花が咲く
+// ============================================================
+
+const layer21WildFlowers = [];
+
+function createLayer21WildFlowers() {
+    layer21WildFlowers.length = 0;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    const flowerCount = Math.max(
+        14,
+        Math.floor(canvasWidth / 90)
+    );
+
+    const palette = [
+        { petal: [200, 190, 255], center: [255, 235, 150] },
+        { petal: [175, 200, 255], center: [255, 240, 180] },
+        { petal: [255, 255, 255], center: [255, 210, 120] },
+        { petal: [215, 175, 240], center: [255, 230, 140] }
+    ];
+
+    for (let i = 0; i < flowerCount; i++) {
+        const color =
+            palette[Math.floor(Math.random() * palette.length)];
+
+        layer21WildFlowers.push({
+            x: Math.random() * canvasWidth,
+            baseY:
+                canvasHeight * 0.56 +
+                Math.random() * canvasHeight * 0.16,
+
+            stemHeight: 26 + Math.random() * 30,
+            headSize: 5 + Math.random() * 3.5,
+
+            petalColor: color.petal,
+            centerColor: color.center,
+
+            swayPhase: Math.random() * Math.PI * 2,
+            swaySpeed: 0.01 + Math.random() * 0.012,
+            swayAmount: 4 + Math.random() * 6,
+
+            bloom: 0,
+            bloomSpeed: 0.02 + Math.random() * 0.02,
+
+            opacity: 0,
+            targetOpacity: 0.55 + Math.random() * 0.35,
+            appearSpeed: 0.02 + Math.random() * 0.02,
+
+            delay: Math.floor(Math.random() * 40),
+            age: 0
+        });
+    }
+}
+
+function drawLayer21WildFlowers() {
+    if (currentLayer < 21) {
+        return;
+    }
+
+    context.save();
+
+    for (const flower of layer21WildFlowers) {
+        flower.age += 1;
+
+        if (flower.age < flower.delay) {
+            continue;
+        }
+
+        flower.swayPhase += flower.swaySpeed;
+
+        if (flower.bloom < 1) {
+            flower.bloom = Math.min(1, flower.bloom + flower.bloomSpeed);
+        }
+
+        if (flower.opacity < flower.targetOpacity) {
+            flower.opacity = Math.min(
+                flower.targetOpacity,
+                flower.opacity + flower.appearSpeed
+            );
+        }
+
+        const sway =
+            Math.sin(flower.swayPhase) * flower.swayAmount;
+
+        const topX = flower.x + sway;
+        const topY = flower.baseY - flower.stemHeight * flower.bloom;
+
+        context.strokeStyle =
+            `rgba(80,140,80,${flower.opacity * 0.85})`;
+        context.lineWidth = 1.6;
+        context.lineCap = "round";
+
+        context.beginPath();
+        context.moveTo(flower.x, flower.baseY);
+        context.quadraticCurveTo(
+            flower.x + sway * 0.4,
+            flower.baseY - flower.stemHeight * flower.bloom * 0.5,
+            topX,
+            topY
+        );
+        context.stroke();
+
+        const [pr, pg, pb] = flower.petalColor;
+        const [cr, cg, cb] = flower.centerColor;
+
+        context.save();
+        context.translate(topX, topY);
+        context.scale(flower.bloom, flower.bloom);
+
+        for (let petal = 0; petal < 6; petal += 1) {
+            context.save();
+            context.rotate((Math.PI * 2 * petal) / 6);
+
+            context.fillStyle =
+                `rgba(${pr},${pg},${pb},${flower.opacity * 0.9})`;
+
+            context.beginPath();
+            context.ellipse(
+                0,
+                -flower.headSize * 0.8,
+                flower.headSize * 0.4,
+                flower.headSize * 0.8,
+                0,
+                0,
+                Math.PI * 2
+            );
+            context.fill();
+            context.restore();
+        }
+
+        context.fillStyle =
+            `rgba(${cr},${cg},${cb},${flower.opacity})`;
+        context.beginPath();
+        context.arc(0, 0, flower.headSize * 0.4, 0, Math.PI * 2);
+        context.fill();
+
+        context.restore();
+    }
+
+    context.restore();
+}
+
+// Layer 21のデータを作成
+createLayer21WildFlowers();
+
+// ============================================================
+// Layer 22 — 森が濃くなる
+// ============================================================
+
+const layer22DenseTrees = [];
+
+function createLayer22DenseTrees() {
+    layer22DenseTrees.length = 0;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    const treeCount = Math.max(
+        24,
+        Math.floor(canvasWidth / 34)
+    );
+
+    for (let i = 0; i < treeCount; i++) {
+        const depth = Math.random();
+
+        layer22DenseTrees.push({
+            x: Math.random() * canvasWidth,
+            baseY:
+                canvasHeight * 0.42 +
+                depth * canvasHeight * 0.3,
+
+            width: 8 + depth * 22 + Math.random() * 10,
+            height: 30 + depth * 60 + Math.random() * 30,
+
+            colorShade: Math.random() < 0.5 ? 0 : 1,
+
+            opacity: 0,
+            targetOpacity: 0.12 + depth * 0.22,
+            appearSpeed: 0.015 + Math.random() * 0.015,
+
+            delay: Math.floor(Math.random() * 40),
+            age: 0
+        });
+    }
+
+    layer22DenseTrees.sort((a, b) => a.baseY - b.baseY);
+}
+
+function drawLayer22DenseTrees() {
+    if (currentLayer < 22) {
+        return;
+    }
+
+    context.save();
+
+    for (const tree of layer22DenseTrees) {
+        tree.age += 1;
+
+        if (tree.age < tree.delay) {
+            continue;
+        }
+
+        if (tree.opacity < tree.targetOpacity) {
+            tree.opacity = Math.min(
+                tree.targetOpacity,
+                tree.opacity + tree.appearSpeed
+            );
+        }
+
+        const shade =
+            tree.colorShade === 0
+                ? [24, 58, 34]
+                : [34, 72, 40];
+
+        context.fillStyle =
+            `rgba(${shade[0]},${shade[1]},${shade[2]},${tree.opacity})`;
+
+        context.beginPath();
+        context.ellipse(
+            tree.x,
+            tree.baseY - tree.height * 0.6,
+            tree.width * 0.5,
+            tree.height * 0.5,
+            0,
+            0,
+            Math.PI * 2
+        );
+        context.fill();
+
+        context.strokeStyle =
+            `rgba(40,32,24,${tree.opacity * 0.9})`;
+        context.lineWidth = Math.max(1, tree.width * 0.12);
+        context.beginPath();
+        context.moveTo(tree.x, tree.baseY);
+        context.lineTo(tree.x, tree.baseY - tree.height * 0.35);
+        context.stroke();
+    }
+
+    context.restore();
+}
+
+// Layer 22のデータを作成
+createLayer22DenseTrees();
+
+// ============================================================
+// Layer 23 — キノコが顔を出す
+// ============================================================
+
+const layer23Mushrooms = [];
+
+function createLayer23Mushrooms() {
+    layer23Mushrooms.length = 0;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    const clusterCount = Math.max(
+        6,
+        Math.floor(canvasWidth / 220)
+    );
+
+    const capColors = [
+        [214, 82, 70],
+        [196, 120, 70],
+        [170, 96, 150],
+        [214, 170, 90]
+    ];
+
+    for (let c = 0; c < clusterCount; c++) {
+        const clusterX = Math.random() * canvasWidth;
+        const clusterY =
+            canvasHeight * 0.58 +
+            Math.random() * canvasHeight * 0.14;
+
+        const count = 2 + Math.floor(Math.random() * 3);
+
+        for (let i = 0; i < count; i++) {
+            const capColor =
+                capColors[Math.floor(Math.random() * capColors.length)];
+
+            layer23Mushrooms.push({
+                x: clusterX + (Math.random() - 0.5) * 30,
+                baseY: clusterY + (Math.random() - 0.5) * 8,
+
+                capRadius: 3 + Math.random() * 4,
+                stemHeight: 4 + Math.random() * 6,
+
+                capColor,
+                hasSpots: Math.random() < 0.6,
+
+                opacity: 0,
+                targetOpacity: 0.6 + Math.random() * 0.3,
+                appearSpeed: 0.02 + Math.random() * 0.02,
+
+                delay: Math.floor(Math.random() * 40),
+                age: 0
+            });
+        }
+    }
+}
+
+function drawLayer23Mushrooms() {
+    if (currentLayer < 23) {
+        return;
+    }
+
+    context.save();
+
+    for (const mushroom of layer23Mushrooms) {
+        mushroom.age += 1;
+
+        if (mushroom.age < mushroom.delay) {
+            continue;
+        }
+
+        if (mushroom.opacity < mushroom.targetOpacity) {
+            mushroom.opacity = Math.min(
+                mushroom.targetOpacity,
+                mushroom.opacity + mushroom.appearSpeed
+            );
+        }
+
+        const [cr, cg, cb] = mushroom.capColor;
+
+        context.fillStyle =
+            `rgba(235,225,205,${mushroom.opacity})`;
+        context.fillRect(
+            mushroom.x - mushroom.capRadius * 0.25,
+            mushroom.baseY - mushroom.stemHeight,
+            mushroom.capRadius * 0.5,
+            mushroom.stemHeight
+        );
+
+        context.fillStyle =
+            `rgba(${cr},${cg},${cb},${mushroom.opacity})`;
+        context.beginPath();
+        context.ellipse(
+            mushroom.x,
+            mushroom.baseY - mushroom.stemHeight,
+            mushroom.capRadius,
+            mushroom.capRadius * 0.6,
+            0,
+            Math.PI,
+            Math.PI * 2
+        );
+        context.fill();
+
+        if (mushroom.hasSpots) {
+            context.fillStyle =
+                `rgba(255,255,240,${mushroom.opacity * 0.85})`;
+
+            context.beginPath();
+            context.arc(
+                mushroom.x - mushroom.capRadius * 0.35,
+                mushroom.baseY - mushroom.stemHeight - mushroom.capRadius * 0.35,
+                mushroom.capRadius * 0.14,
+                0,
+                Math.PI * 2
+            );
+            context.fill();
+
+            context.beginPath();
+            context.arc(
+                mushroom.x + mushroom.capRadius * 0.3,
+                mushroom.baseY - mushroom.stemHeight - mushroom.capRadius * 0.3,
+                mushroom.capRadius * 0.12,
+                0,
+                Math.PI * 2
+            );
+            context.fill();
+        }
+    }
+
+    context.restore();
+}
+
+// Layer 23のデータを作成
+createLayer23Mushrooms();
+
+// ============================================================
+// Layer 24 — 鳥の巣ができる
+// ============================================================
+
+const layer24Nests = [];
+
+function createLayer24Nests() {
+    layer24Nests.length = 0;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    const nestCount = Math.max(
+        2,
+        Math.floor(canvasWidth / 480)
+    );
+
+    for (let i = 0; i < nestCount; i++) {
+        layer24Nests.push({
+            x: canvasWidth * (0.15 + Math.random() * 0.7),
+            y: canvasHeight * (0.22 + Math.random() * 0.18),
+
+            radius: 10 + Math.random() * 5,
+
+            eggCount: 2 + Math.floor(Math.random() * 2),
+
+            opacity: 0,
+            targetOpacity: 0.75 + Math.random() * 0.2,
+            appearSpeed: 0.018 + Math.random() * 0.015,
+
+            delay: Math.floor(Math.random() * 40),
+            age: 0
+        });
+    }
+}
+
+function drawLayer24Nests() {
+    if (currentLayer < 24) {
+        return;
+    }
+
+    context.save();
+
+    for (const nest of layer24Nests) {
+        nest.age += 1;
+
+        if (nest.age < nest.delay) {
+            continue;
+        }
+
+        if (nest.opacity < nest.targetOpacity) {
+            nest.opacity = Math.min(
+                nest.targetOpacity,
+                nest.opacity + nest.appearSpeed
+            );
+        }
+
+        context.strokeStyle =
+            `rgba(120,88,55,${nest.opacity})`;
+        context.lineWidth = 1.6;
+        context.lineCap = "round";
+
+        for (let ring = 0; ring < 4; ring += 1) {
+            context.beginPath();
+            context.ellipse(
+                nest.x,
+                nest.y + ring * 1.4,
+                nest.radius - ring * 0.6,
+                nest.radius * 0.42 - ring * 0.25,
+                0,
+                0,
+                Math.PI * 2
+            );
+            context.stroke();
+        }
+
+        context.fillStyle =
+            `rgba(230,235,220,${nest.opacity * 0.92})`;
+
+        for (let e = 0; e < nest.eggCount; e += 1) {
+            const spread = (e - (nest.eggCount - 1) / 2) * nest.radius * 0.5;
+
+            context.beginPath();
+            context.ellipse(
+                nest.x + spread,
+                nest.y - nest.radius * 0.15,
+                nest.radius * 0.22,
+                nest.radius * 0.28,
+                0,
+                0,
+                Math.PI * 2
+            );
+            context.fill();
+        }
+    }
+
+    context.restore();
+}
+
+// Layer 24のデータを作成
+createLayer24Nests();
+
+// ============================================================
+// Layer 25 — 朝日が差し込む
+// ============================================================
+
+let layer25SunPhase = 0;
+
+function drawLayer25Sunrise() {
+    if (currentLayer < 25) {
+        return;
+    }
+
+    layer25SunPhase += 0.012;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    const pulse = 0.85 + Math.sin(layer25SunPhase) * 0.15;
+
+    const sunX = canvasWidth * 0.78;
+    const sunY = canvasHeight * 0.18;
+    const radius = canvasWidth * 0.32 * pulse;
+
+    context.save();
+    context.globalCompositeOperation = "screen";
+
+    const gradient = context.createRadialGradient(
+        sunX, sunY, 0,
+        sunX, sunY, radius
+    );
+
+    gradient.addColorStop(0, "rgba(255,236,180,0.55)");
+    gradient.addColorStop(0.35, "rgba(255,205,140,0.28)");
+    gradient.addColorStop(0.7, "rgba(255,180,140,0.1)");
+    gradient.addColorStop(1, "rgba(255,180,140,0)");
+
+    context.fillStyle = gradient;
+    context.beginPath();
+    context.arc(sunX, sunY, radius, 0, Math.PI * 2);
+    context.fill();
+
+    context.restore();
+}
+
+// ============================================================
+// Layer 26 — 雲の影が流れる
+// ============================================================
+
+const layer26CloudShadows = [];
+
+function createLayer26CloudShadows() {
+    layer26CloudShadows.length = 0;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    for (let i = 0; i < 5; i++) {
+        layer26CloudShadows.push({
+            x: Math.random() * canvasWidth * 1.4 - canvasWidth * 0.2,
+            y:
+                canvasHeight * 0.4 +
+                Math.random() * canvasHeight * 0.4,
+
+            width: 120 + Math.random() * 180,
+            height: 30 + Math.random() * 30,
+
+            speed: 0.06 + Math.random() * 0.1,
+
+            opacity: 0,
+            targetOpacity: 0.05 + Math.random() * 0.06,
+            appearSpeed: 0.006 + Math.random() * 0.006,
+
+            delay: Math.floor(Math.random() * 40),
+            age: 0
+        });
+    }
+}
+
+function drawLayer26CloudShadows() {
+    if (currentLayer < 26) {
+        return;
+    }
+
+    context.save();
+
+    for (const shadow of layer26CloudShadows) {
+        shadow.age += 1;
+
+        if (shadow.age < shadow.delay) {
+            continue;
+        }
+
+        shadow.x += shadow.speed;
+
+        if (shadow.x > getCanvasWidth() + shadow.width) {
+            shadow.x = -shadow.width;
+        }
+
+        if (shadow.opacity < shadow.targetOpacity) {
+            shadow.opacity = Math.min(
+                shadow.targetOpacity,
+                shadow.opacity + shadow.appearSpeed
+            );
+        }
+
+        context.filter = "blur(14px)";
+        context.fillStyle =
+            `rgba(20,30,25,${shadow.opacity})`;
+
+        context.beginPath();
+        context.ellipse(
+            shadow.x,
+            shadow.y,
+            shadow.width * 0.5,
+            shadow.height * 0.5,
+            0,
+            0,
+            Math.PI * 2
+        );
+        context.fill();
+        context.filter = "none";
+    }
+
+    context.restore();
+}
+
+// Layer 26のデータを作成
+createLayer26CloudShadows();
+
+// ============================================================
+// Layer 27 — 木漏れ日が揺れる
+// ============================================================
+
+const layer27DappledLight = [];
+
+function createLayer27DappledLight() {
+    layer27DappledLight.length = 0;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    const count = Math.max(20, Math.floor(canvasWidth / 32));
+
+    for (let i = 0; i < count; i++) {
+        layer27DappledLight.push({
+            x: Math.random() * canvasWidth,
+            y:
+                canvasHeight * 0.4 +
+                Math.random() * canvasHeight * 0.35,
+
+            radius: 3 + Math.random() * 6,
+
+            phase: Math.random() * Math.PI * 2,
+            speed: 0.02 + Math.random() * 0.03,
+
+            opacity: 0,
+            targetOpacity: 0.12 + Math.random() * 0.2,
+            appearSpeed: 0.02 + Math.random() * 0.02,
+
+            delay: Math.floor(Math.random() * 40),
+            age: 0
+        });
+    }
+}
+
+function drawLayer27DappledLight() {
+    if (currentLayer < 27) {
+        return;
+    }
+
+    context.save();
+    context.globalCompositeOperation = "screen";
+
+    for (const spot of layer27DappledLight) {
+        spot.age += 1;
+
+        if (spot.age < spot.delay) {
+            continue;
+        }
+
+        spot.phase += spot.speed;
+
+        if (spot.opacity < spot.targetOpacity) {
+            spot.opacity = Math.min(
+                spot.targetOpacity,
+                spot.opacity + spot.appearSpeed
+            );
+        }
+
+        const flicker =
+            0.4 + Math.abs(Math.sin(spot.phase)) * 0.6;
+
+        context.fillStyle =
+            `rgba(255,244,200,${spot.opacity * flicker})`;
+
+        context.beginPath();
+        context.arc(spot.x, spot.y, spot.radius, 0, Math.PI * 2);
+        context.fill();
+    }
+
+    context.restore();
+}
+
+// Layer 27のデータを作成
+createLayer27DappledLight();
+
+// ============================================================
+// Layer 28 — 蝶が増える
+// ============================================================
+
+const layer28Butterflies = [];
+
+function createLayer28Butterflies() {
+    layer28Butterflies.length = 0;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    const wingColors = [
+        ["rgba(255,160,224,0.9)", "rgba(133,202,255,0.9)"],
+        ["rgba(255,214,120,0.9)", "rgba(255,150,120,0.9)"],
+        ["rgba(190,160,255,0.9)", "rgba(160,220,255,0.9)"]
+    ];
+
+    for (let i = 0; i < 8; i++) {
+        layer28Butterflies.push({
+            x: Math.random() * canvasWidth,
+            y:
+                canvasHeight * 0.25 +
+                Math.random() * canvasHeight * 0.45,
+
+            size: 4 + Math.random() * 4,
+            speed: 0.2 + Math.random() * 0.4,
+            phase: Math.random() * Math.PI * 2,
+            direction: Math.random() > 0.5 ? 1 : -1,
+
+            colors:
+                wingColors[Math.floor(Math.random() * wingColors.length)],
+
+            opacity: 0,
+            targetOpacity: 0.55 + Math.random() * 0.35,
+            appearSpeed: 0.02 + Math.random() * 0.02,
+
+            delay: Math.floor(Math.random() * 40),
+            age: 0
+        });
+    }
+}
+
+function drawLayer28Butterflies() {
+    if (currentLayer < 28) {
+        return;
+    }
+
+    context.save();
+
+    for (const butterfly of layer28Butterflies) {
+        butterfly.age += 1;
+
+        if (butterfly.age < butterfly.delay) {
+            continue;
+        }
+
+        butterfly.x += butterfly.speed * butterfly.direction;
+        butterfly.y +=
+            Math.sin(animationTime * 0.03 + butterfly.phase) * 0.4;
+
+        if (butterfly.x > getCanvasWidth() + 20) butterfly.x = -20;
+        if (butterfly.x < -20) butterfly.x = getCanvasWidth() + 20;
+
+        if (butterfly.opacity < butterfly.targetOpacity) {
+            butterfly.opacity = Math.min(
+                butterfly.targetOpacity,
+                butterfly.opacity + butterfly.appearSpeed
+            );
+        }
+
+        const wingScale =
+            0.3 +
+            Math.abs(Math.sin(animationTime * 0.12 + butterfly.phase)) * 0.8;
+
+        context.save();
+        context.translate(butterfly.x, butterfly.y);
+        if (butterfly.direction < 0) context.scale(-1, 1);
+        context.globalAlpha = butterfly.opacity;
+
+        context.fillStyle = butterfly.colors[0];
+        context.beginPath();
+        context.ellipse(
+            -butterfly.size * 0.5, 0,
+            butterfly.size * wingScale, butterfly.size * 0.65,
+            -0.35, 0, Math.PI * 2
+        );
+        context.fill();
+
+        context.fillStyle = butterfly.colors[1];
+        context.beginPath();
+        context.ellipse(
+            butterfly.size * 0.5, 0,
+            butterfly.size * wingScale, butterfly.size * 0.65,
+            0.35, 0, Math.PI * 2
+        );
+        context.fill();
+
+        context.restore();
+    }
+
+    context.restore();
+}
+
+// Layer 28のデータを作成
+createLayer28Butterflies();
+
+// ============================================================
+// Layer 29 — 花びらが舞う
+// ============================================================
+
+const layer29Petals = [];
+
+function createLayer29Petals() {
+    layer29Petals.length = 0;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    const count = Math.max(24, Math.floor(canvasWidth / 30));
+
+    for (let i = 0; i < count; i++) {
+        layer29Petals.push({
+            x: Math.random() * canvasWidth,
+            y: Math.random() * canvasHeight,
+
+            size: 3 + Math.random() * 3,
+
+            speedY: 0.25 + Math.random() * 0.35,
+            swayPhase: Math.random() * Math.PI * 2,
+            swaySpeed: 0.02 + Math.random() * 0.02,
+            swayAmount: 12 + Math.random() * 18,
+
+            rotation: Math.random() * Math.PI * 2,
+            rotationSpeed: -0.03 + Math.random() * 0.06,
+
+            opacity: 0,
+            targetOpacity: 0.5 + Math.random() * 0.35,
+            appearSpeed: 0.02 + Math.random() * 0.02,
+
+            delay: Math.floor(Math.random() * 40),
+            age: 0
+        });
+    }
+}
+
+function drawLayer29Petals() {
+    if (currentLayer < 29) {
+        return;
+    }
+
+    context.save();
+
+    for (const petal of layer29Petals) {
+        petal.age += 1;
+
+        if (petal.age < petal.delay) {
+            continue;
+        }
+
+        petal.y += petal.speedY;
+        petal.swayPhase += petal.swaySpeed;
+        petal.rotation += petal.rotationSpeed;
+
+        if (petal.y > getCanvasHeight() + 10) {
+            petal.y = -10;
+            petal.x = Math.random() * getCanvasWidth();
+        }
+
+        if (petal.opacity < petal.targetOpacity) {
+            petal.opacity = Math.min(
+                petal.targetOpacity,
+                petal.opacity + petal.appearSpeed
+            );
+        }
+
+        const drawX =
+            petal.x + Math.sin(petal.swayPhase) * petal.swayAmount;
+
+        context.save();
+        context.translate(drawX, petal.y);
+        context.rotate(petal.rotation);
+
+        context.fillStyle =
+            `rgba(255,190,215,${petal.opacity})`;
+
+        context.beginPath();
+        context.ellipse(0, 0, petal.size, petal.size * 0.55, 0, 0, Math.PI * 2);
+        context.fill();
+
+        context.restore();
+    }
+
+    context.restore();
+}
+
+// Layer 29のデータを作成
+createLayer29Petals();
+
+// ============================================================
+// Layer 30 — 水面がきらめく
+// ============================================================
+
+const layer30WaterSparkles = [];
+
+function createLayer30WaterSparkles() {
+    layer30WaterSparkles.length = 0;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    const count = Math.max(20, Math.floor(canvasWidth / 40));
+
+    for (let i = 0; i < count; i++) {
+        layer30WaterSparkles.push({
+            x: Math.random() * canvasWidth,
+            y:
+                canvasHeight * 0.58 +
+                Math.random() * canvasHeight * 0.12,
+
+            radius: 0.8 + Math.random() * 1.6,
+
+            phase: Math.random() * Math.PI * 2,
+            speed: 0.03 + Math.random() * 0.05,
+
+            opacity: 0,
+            targetOpacity: 0.3 + Math.random() * 0.4,
+            appearSpeed: 0.02 + Math.random() * 0.02,
+
+            delay: Math.floor(Math.random() * 40),
+            age: 0
+        });
+    }
+}
+
+function drawLayer30WaterSparkles() {
+    if (currentLayer < 30) {
+        return;
+    }
+
+    context.save();
+    context.globalCompositeOperation = "screen";
+
+    for (const sparkle of layer30WaterSparkles) {
+        sparkle.age += 1;
+
+        if (sparkle.age < sparkle.delay) {
+            continue;
+        }
+
+        sparkle.phase += sparkle.speed;
+
+        if (sparkle.opacity < sparkle.targetOpacity) {
+            sparkle.opacity = Math.min(
+                sparkle.targetOpacity,
+                sparkle.opacity + sparkle.appearSpeed
+            );
+        }
+
+        const twinkle =
+            Math.max(0, Math.sin(sparkle.phase));
+
+        context.fillStyle =
+            `rgba(255,255,240,${sparkle.opacity * twinkle})`;
+
+        context.beginPath();
+        context.arc(sparkle.x, sparkle.y, sparkle.radius, 0, Math.PI * 2);
+        context.fill();
+    }
+
+    context.restore();
+}
+
+// Layer 30のデータを作成
+createLayer30WaterSparkles();
+
+// ============================================================
+// Layer 31 — 流れ星
+// ============================================================
+
+const layer31ShootingStars = [];
+
+function createLayer31ShootingStars() {
+    layer31ShootingStars.length = 0;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    for (let i = 0; i < 6; i++) {
+        layer31ShootingStars.push({
+            resetDelay: Math.floor(60 + Math.random() * 240),
+            timer: Math.floor(Math.random() * 40),
+
+            x: 0,
+            y: 0,
+            length: 60 + Math.random() * 60,
+            speed: 6 + Math.random() * 5,
+            angle: 0.5 + Math.random() * 0.3,
+
+            life: 0,
+            maxLife: 40 + Math.random() * 20,
+
+            active: false
+        });
+    }
+}
+
+function drawLayer31ShootingStars() {
+    if (currentLayer < 31) {
+        return;
+    }
+
+    context.save();
+    context.lineCap = "round";
+
+    for (const star of layer31ShootingStars) {
+        star.timer += 1;
+
+        if (!star.active && star.timer >= star.resetDelay) {
+            star.active = true;
+            star.life = 0;
+            star.x = getCanvasWidth() * (0.2 + Math.random() * 0.6);
+            star.y = -10;
+            star.timer = 0;
+            star.resetDelay = Math.floor(120 + Math.random() * 300);
+        }
+
+        if (!star.active) {
+            continue;
+        }
+
+        star.life += 1;
+        star.x += Math.cos(star.angle) * star.speed;
+        star.y += Math.sin(star.angle) * star.speed;
+
+        const fade =
+            star.life < star.maxLife * 0.3
+                ? star.life / (star.maxLife * 0.3)
+                : 1 - (star.life - star.maxLife * 0.3) / (star.maxLife * 0.7);
+
+        if (star.life >= star.maxLife || star.y > getCanvasHeight() + 20) {
+            star.active = false;
+            continue;
+        }
+
+        const tailX = star.x - Math.cos(star.angle) * star.length;
+        const tailY = star.y - Math.sin(star.angle) * star.length;
+
+        const gradient = context.createLinearGradient(
+            star.x, star.y, tailX, tailY
+        );
+        gradient.addColorStop(0, `rgba(255,255,245,${Math.max(0, fade)})`);
+        gradient.addColorStop(1, "rgba(255,255,245,0)");
+
+        context.strokeStyle = gradient;
+        context.lineWidth = 1.6;
+
+        context.beginPath();
+        context.moveTo(star.x, star.y);
+        context.lineTo(tailX, tailY);
+        context.stroke();
+    }
+
+    context.restore();
+}
+
+// Layer 31のデータを作成
+createLayer31ShootingStars();
+
+// ============================================================
+// Layer 32 — オーロラが揺れる
+// ============================================================
+
+let layer32Phase = 0;
+
+function drawLayer32Aurora() {
+    if (currentLayer < 32) {
+        return;
+    }
+
+    layer32Phase += 0.006;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    context.save();
+    context.globalCompositeOperation = "screen";
+
+    const bands = [
+        { color: [140, 255, 200], offset: 0 },
+        { color: [160, 190, 255], offset: 2.1 },
+        { color: [220, 160, 255], offset: 4.2 }
+    ];
+
+    for (const band of bands) {
+        context.beginPath();
+
+        for (let x = 0; x <= canvasWidth; x += canvasWidth / 40) {
+            const y =
+                canvasHeight * 0.14 +
+                Math.sin(x * 0.006 + layer32Phase + band.offset) *
+                    canvasHeight * 0.05 +
+                Math.sin(x * 0.002 + layer32Phase * 0.6) * canvasHeight * 0.03;
+
+            if (x === 0) {
+                context.moveTo(x, y);
+            } else {
+                context.lineTo(x, y);
+            }
+        }
+
+        for (let x = canvasWidth; x >= 0; x -= canvasWidth / 40) {
+            const y =
+                canvasHeight * 0.14 +
+                canvasHeight * 0.1 +
+                Math.sin(x * 0.006 + layer32Phase + band.offset) *
+                    canvasHeight * 0.05 +
+                Math.sin(x * 0.002 + layer32Phase * 0.6) * canvasHeight * 0.03;
+
+            context.lineTo(x, y);
+        }
+
+        context.closePath();
+
+        const [r, g, b] = band.color;
+        context.fillStyle = `rgba(${r},${g},${b},0.06)`;
+        context.fill();
+    }
+
+    context.restore();
+}
+
+// ============================================================
+// Layer 33 — 木々が光をまとう
+// ============================================================
+
+function drawLayer33GlowingTrees() {
+    if (currentLayer < 33) {
+        return;
+    }
+
+    context.save();
+    context.globalCompositeOperation = "screen";
+
+    const pulse = 0.7 + Math.sin(animationTime * 0.02) * 0.3;
+
+    for (const tree of layer19Trees) {
+        if (tree.growth < 1) {
+            continue;
+        }
+
+        const glowX = tree.x;
+        const glowY = tree.baseY - tree.height * 0.85;
+        const glowRadius = tree.crownWidth * 1.4 * pulse;
+
+        const gradient = context.createRadialGradient(
+            glowX, glowY, 0,
+            glowX, glowY, glowRadius
+        );
+
+        gradient.addColorStop(0, `rgba(255,240,170,${tree.opacity * 0.22})`);
+        gradient.addColorStop(1, "rgba(255,240,170,0)");
+
+        context.fillStyle = gradient;
+        context.beginPath();
+        context.arc(glowX, glowY, glowRadius, 0, Math.PI * 2);
+        context.fill();
+    }
+
+    context.restore();
+}
+
+// ============================================================
+// Layer 34 — 季節の風が吹く
+// ============================================================
+
+const layer34WindGusts = [];
+
+function createLayer34WindGusts() {
+    layer34WindGusts.length = 0;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    const colors = [
+        "rgba(255,210,140,OPACITY)",
+        "rgba(255,190,190,OPACITY)",
+        "rgba(220,235,180,OPACITY)"
+    ];
+
+    for (let i = 0; i < 24; i++) {
+        layer34WindGusts.push({
+            x: Math.random() * canvasWidth,
+            y: Math.random() * canvasHeight,
+
+            size: 2.5 + Math.random() * 3,
+
+            speedX: 0.6 + Math.random() * 1,
+            swirl: Math.random() * Math.PI * 2,
+            swirlSpeed: 0.04 + Math.random() * 0.05,
+            swirlRadius: 6 + Math.random() * 10,
+
+            colorTemplate:
+                colors[Math.floor(Math.random() * colors.length)],
+
+            opacity: 0,
+            targetOpacity: 0.4 + Math.random() * 0.35,
+            appearSpeed: 0.02 + Math.random() * 0.02,
+
+            delay: Math.floor(Math.random() * 40),
+            age: 0
+        });
+    }
+}
+
+function drawLayer34WindGusts() {
+    if (currentLayer < 34) {
+        return;
+    }
+
+    context.save();
+
+    for (const leaf of layer34WindGusts) {
+        leaf.age += 1;
+
+        if (leaf.age < leaf.delay) {
+            continue;
+        }
+
+        leaf.swirl += leaf.swirlSpeed;
+        leaf.x += leaf.speedX;
+
+        if (leaf.x > getCanvasWidth() + leaf.swirlRadius) {
+            leaf.x = -leaf.swirlRadius;
+            leaf.y = Math.random() * getCanvasHeight();
+        }
+
+        if (leaf.opacity < leaf.targetOpacity) {
+            leaf.opacity = Math.min(
+                leaf.targetOpacity,
+                leaf.opacity + leaf.appearSpeed
+            );
+        }
+
+        const drawX = leaf.x + Math.cos(leaf.swirl) * leaf.swirlRadius;
+        const drawY = leaf.y + Math.sin(leaf.swirl) * leaf.swirlRadius;
+
+        context.fillStyle =
+            leaf.colorTemplate.replace("OPACITY", String(leaf.opacity));
+
+        context.beginPath();
+        context.ellipse(
+            drawX, drawY,
+            leaf.size, leaf.size * 0.5,
+            leaf.swirl, 0, Math.PI * 2
+        );
+        context.fill();
+    }
+
+    context.restore();
+}
+
+// Layer 34のデータを作成
+createLayer34WindGusts();
+
+// ============================================================
+// Layer 35 — 森に生命の息吹が満ちる
+// ============================================================
+
+function drawLayer35ForestLife() {
+    if (currentLayer < 35) {
+        return;
+    }
+
+    context.save();
+    context.globalCompositeOperation = "screen";
+
+    const pulse = 0.5 + Math.sin(animationTime * 0.015) * 0.5;
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    const gradient = context.createRadialGradient(
+        canvasWidth * 0.5, canvasHeight * 0.6, 0,
+        canvasWidth * 0.5, canvasHeight * 0.6, canvasWidth * 0.55
+    );
+
+    gradient.addColorStop(0, `rgba(150,255,160,${0.05 * pulse})`);
+    gradient.addColorStop(1, "rgba(150,255,160,0)");
+
+    context.fillStyle = gradient;
+    context.fillRect(0, 0, canvasWidth, canvasHeight);
+
+    context.restore();
+}
+
+// ============================================================
+// Layer 36 — 世界に祝福の光が降る
+// ============================================================
+
+const layer36Blessing = [];
+
+function createLayer36Blessing() {
+    layer36Blessing.length = 0;
+
+    const canvasWidth = getCanvasWidth();
+
+    for (let i = 0; i < 5; i++) {
+        layer36Blessing.push({
+            x: canvasWidth * (0.1 + Math.random() * 0.8),
+            width: 30 + Math.random() * 50,
+
+            phase: Math.random() * Math.PI * 2,
+            speed: 0.006 + Math.random() * 0.01,
+
+            opacity: 0,
+            targetOpacity: 0.06 + Math.random() * 0.08,
+            appearSpeed: 0.004 + Math.random() * 0.006,
+
+            delay: Math.floor(Math.random() * 40),
+            age: 0
+        });
+    }
+}
+
+function drawLayer36Blessing() {
+    if (currentLayer < 36) {
+        return;
+    }
+
+    context.save();
+    context.globalCompositeOperation = "screen";
+
+    const canvasHeight = getCanvasHeight();
+
+    for (const ray of layer36Blessing) {
+        ray.age += 1;
+
+        if (ray.age < ray.delay) {
+            continue;
+        }
+
+        ray.phase += ray.speed;
+
+        if (ray.opacity < ray.targetOpacity) {
+            ray.opacity = Math.min(
+                ray.targetOpacity,
+                ray.opacity + ray.appearSpeed
+            );
+        }
+
+        const shimmer =
+            0.6 + Math.sin(ray.phase) * 0.4;
+
+        const gradient = context.createLinearGradient(
+            ray.x, 0, ray.x, canvasHeight
+        );
+        gradient.addColorStop(0, `rgba(255,245,200,${ray.opacity * shimmer})`);
+        gradient.addColorStop(1, "rgba(255,245,200,0)");
+
+        context.fillStyle = gradient;
+        context.beginPath();
+        context.moveTo(ray.x - ray.width / 2, 0);
+        context.lineTo(ray.x + ray.width / 2, 0);
+        context.lineTo(ray.x + ray.width * 0.2, canvasHeight);
+        context.lineTo(ray.x - ray.width * 0.2, canvasHeight);
+        context.closePath();
+        context.fill();
+    }
+
+    context.restore();
+}
+
+// Layer 36のデータを作成
+createLayer36Blessing();
+
+// ============================================================
+// Layer 37 — 星空がまたたく
+// ============================================================
+
+const layer37Stars = [];
+
+function createLayer37Stars() {
+    layer37Stars.length = 0;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    const count = Math.max(30, Math.floor(canvasWidth / 26));
+
+    for (let i = 0; i < count; i++) {
+        layer37Stars.push({
+            x: Math.random() * canvasWidth,
+            y: Math.random() * canvasHeight * 0.5,
+
+            radius: 0.6 + Math.random() * 1.4,
+
+            phase: Math.random() * Math.PI * 2,
+            speed: 0.02 + Math.random() * 0.04,
+
+            opacity: 0,
+            targetOpacity: 0.4 + Math.random() * 0.5,
+            appearSpeed: 0.015 + Math.random() * 0.02,
+
+            delay: Math.floor(Math.random() * 40),
+            age: 0
+        });
+    }
+}
+
+function drawLayer37Stars() {
+    if (currentLayer < 37) {
+        return;
+    }
+
+    context.save();
+
+    for (const star of layer37Stars) {
+        star.age += 1;
+
+        if (star.age < star.delay) {
+            continue;
+        }
+
+        star.phase += star.speed;
+
+        if (star.opacity < star.targetOpacity) {
+            star.opacity = Math.min(
+                star.targetOpacity,
+                star.opacity + star.appearSpeed
+            );
+        }
+
+        const twinkle =
+            0.3 + Math.abs(Math.sin(star.phase)) * 0.7;
+
+        context.fillStyle =
+            `rgba(255,255,250,${star.opacity * twinkle})`;
+
+        context.beginPath();
+        context.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        context.fill();
+    }
+
+    context.restore();
+}
+
+// Layer 37のデータを作成
+createLayer37Stars();
+
+// ============================================================
+// Layer 38 — 金色の霧が満ちる
+// ============================================================
+
+const layer38GoldMist = [];
+
+function createLayer38GoldMist() {
+    layer38GoldMist.length = 0;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    for (let i = 0; i < 6; i++) {
+        layer38GoldMist.push({
+            x: Math.random() * canvasWidth,
+            y:
+                canvasHeight * 0.3 +
+                Math.random() * canvasHeight * 0.5,
+
+            radius: 90 + Math.random() * 120,
+
+            speed: 0.04 + Math.random() * 0.06,
+
+            opacity: 0,
+            targetOpacity: 0.03 + Math.random() * 0.04,
+            appearSpeed: 0.003 + Math.random() * 0.004,
+
+            delay: Math.floor(Math.random() * 40),
+            age: 0
+        });
+    }
+}
+
+function drawLayer38GoldMist() {
+    if (currentLayer < 38) {
+        return;
+    }
+
+    context.save();
+    context.globalCompositeOperation = "screen";
+
+    for (const mist of layer38GoldMist) {
+        mist.age += 1;
+
+        if (mist.age < mist.delay) {
+            continue;
+        }
+
+        mist.x += mist.speed;
+
+        if (mist.x > getCanvasWidth() + mist.radius) {
+            mist.x = -mist.radius;
+        }
+
+        if (mist.opacity < mist.targetOpacity) {
+            mist.opacity = Math.min(
+                mist.targetOpacity,
+                mist.opacity + mist.appearSpeed
+            );
+        }
+
+        const gradient = context.createRadialGradient(
+            mist.x, mist.y, 0,
+            mist.x, mist.y, mist.radius
+        );
+        gradient.addColorStop(0, `rgba(255,225,160,${mist.opacity})`);
+        gradient.addColorStop(1, "rgba(255,225,160,0)");
+
+        context.fillStyle = gradient;
+        context.beginPath();
+        context.arc(mist.x, mist.y, mist.radius, 0, Math.PI * 2);
+        context.fill();
+    }
+
+    context.restore();
+}
+
+// Layer 38のデータを作成
+createLayer38GoldMist();
+
+// ============================================================
+// Layer 39 — 世界が満開になる
+// ============================================================
+
+const layer39Bursts = [];
+
+function createLayer39Bursts() {
+    layer39Bursts.length = 0;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    const count = Math.max(14, Math.floor(canvasWidth / 110));
+
+    for (let i = 0; i < count; i++) {
+        layer39Bursts.push({
+            x: Math.random() * canvasWidth,
+            y:
+                canvasHeight * 0.3 +
+                Math.random() * canvasHeight * 0.5,
+
+            radius: 3 + Math.random() * 3,
+
+            phase: Math.random() * Math.PI * 2,
+            speed: 0.02 + Math.random() * 0.025,
+
+            opacity: 0,
+            targetOpacity: 0.35 + Math.random() * 0.4,
+            appearSpeed: 0.015 + Math.random() * 0.02,
+
+            delay: Math.floor(Math.random() * 40),
+            age: 0
+        });
+    }
+}
+
+function drawLayer39Bursts() {
+    if (currentLayer < 39) {
+        return;
+    }
+
+    context.save();
+    context.globalCompositeOperation = "screen";
+
+    for (const burst of layer39Bursts) {
+        burst.age += 1;
+
+        if (burst.age < burst.delay) {
+            continue;
+        }
+
+        burst.phase += burst.speed;
+
+        if (burst.opacity < burst.targetOpacity) {
+            burst.opacity = Math.min(
+                burst.targetOpacity,
+                burst.opacity + burst.appearSpeed
+            );
+        }
+
+        const pulse =
+            0.5 + Math.abs(Math.sin(burst.phase)) * 0.5;
+
+        context.strokeStyle =
+            `rgba(255,250,210,${burst.opacity * pulse})`;
+        context.lineWidth = 1;
+
+        for (let ray = 0; ray < 4; ray += 1) {
+            const angle = (Math.PI / 2) * ray + burst.phase * 0.3;
+
+            context.beginPath();
+            context.moveTo(
+                burst.x - Math.cos(angle) * burst.radius * pulse,
+                burst.y - Math.sin(angle) * burst.radius * pulse
+            );
+            context.lineTo(
+                burst.x + Math.cos(angle) * burst.radius * pulse,
+                burst.y + Math.sin(angle) * burst.radius * pulse
+            );
+            context.stroke();
+        }
+
+        context.fillStyle =
+            `rgba(255,250,220,${burst.opacity})`;
+        context.beginPath();
+        context.arc(burst.x, burst.y, burst.radius * 0.32, 0, Math.PI * 2);
+        context.fill();
+    }
+
+    context.restore();
+}
+
+// Layer 39のデータを作成
+createLayer39Bursts();
+
+// ============================================================
+// Layer 40 — 世界が完成する
+// ============================================================
+
+const layer40FinaleParticles = [];
+
+function createLayer40Finale() {
+    layer40FinaleParticles.length = 0;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    const count = Math.max(40, Math.floor(canvasWidth / 20));
+
+    for (let i = 0; i < count; i++) {
+        layer40FinaleParticles.push({
+            x: Math.random() * canvasWidth,
+            baseY: canvasHeight + Math.random() * canvasHeight * 0.3,
+
+            radius: 1 + Math.random() * 2.4,
+
+            speed: 0.15 + Math.random() * 0.35,
+            driftPhase: Math.random() * Math.PI * 2,
+            driftSpeed: 0.01 + Math.random() * 0.02,
+
+            opacity: 0,
+            targetOpacity: 0.35 + Math.random() * 0.5,
+            appearSpeed: 0.015 + Math.random() * 0.02,
+
+            delay: Math.floor(Math.random() * 60),
+            age: 0
+        });
+    }
+}
+
+function drawLayer40Finale() {
+    if (currentLayer < 40) {
+        return;
+    }
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    context.save();
+    context.globalCompositeOperation = "screen";
+
+    const pulse = 0.75 + Math.sin(animationTime * 0.015) * 0.25;
+
+    const glow = context.createRadialGradient(
+        canvasWidth * 0.5, canvasHeight * 0.45, 0,
+        canvasWidth * 0.5, canvasHeight * 0.45, canvasWidth * 0.65 * pulse
+    );
+
+    glow.addColorStop(0, "rgba(255,246,205,0.16)");
+    glow.addColorStop(0.5, "rgba(255,230,170,0.08)");
+    glow.addColorStop(1, "rgba(255,230,170,0)");
+
+    context.fillStyle = glow;
+    context.fillRect(0, 0, canvasWidth, canvasHeight);
+
+    for (const particle of layer40FinaleParticles) {
+        particle.age += 1;
+
+        if (particle.age < particle.delay) {
+            continue;
+        }
+
+        particle.baseY -= particle.speed;
+        particle.driftPhase += particle.driftSpeed;
+
+        if (particle.baseY < -20) {
+            particle.baseY = canvasHeight + 20;
+            particle.x = Math.random() * canvasWidth;
+        }
+
+        if (particle.opacity < particle.targetOpacity) {
+            particle.opacity = Math.min(
+                particle.targetOpacity,
+                particle.opacity + particle.appearSpeed
+            );
+        }
+
+        const drawX =
+            particle.x + Math.sin(particle.driftPhase) * 14;
+
+        context.fillStyle =
+            `rgba(255,248,215,${particle.opacity})`;
+        context.shadowColor = "rgba(255,248,215,0.9)";
+        context.shadowBlur = 8;
+
+        context.beginPath();
+        context.arc(drawX, particle.baseY, particle.radius, 0, Math.PI * 2);
+        context.fill();
+    }
+
+    context.restore();
+}
+
+// Layer 40のデータを作成
+createLayer40Finale();
