@@ -1550,6 +1550,7 @@ function animate() {
   drawLayer38GoldMist();
   drawLayer39Bursts();
   drawLayer40Finale();
+  drawLayer40Fireworks();
 
   requestAnimationFrame(animate);
 }
@@ -1599,6 +1600,7 @@ window.addEventListener("resize", function () {
   createLayer38GoldMist();
   createLayer39Bursts();
   createLayer40Finale();
+  createLayer40Fireworks();
 });
 
 /* ---------------------------------------------------------
@@ -6245,13 +6247,13 @@ createLayer20Atmosphere();
 
 const skyMoodKeyframes = [
     { layer: 24, r: 255, g: 255, b: 255, a: 0 },
-    { layer: 27, r: 255, g: 175, b: 110, a: 0.14 },
-    { layer: 30, r: 255, g: 140, b: 95, a: 0.22 },
-    { layer: 33, r: 150, g: 95, b: 150, a: 0.34 },
-    { layer: 35, r: 70, g: 60, b: 120, a: 0.46 },
-    { layer: 37, r: 28, g: 30, b: 70, a: 0.58 },
-    { layer: 39, r: 255, g: 195, b: 140, a: 0.3 },
-    { layer: 40, r: 255, g: 230, b: 185, a: 0.14 }
+    { layer: 27, r: 255, g: 175, b: 110, a: 0.22 },
+    { layer: 30, r: 255, g: 140, b: 95, a: 0.32 },
+    { layer: 33, r: 150, g: 95, b: 150, a: 0.55 },
+    { layer: 35, r: 55, g: 48, b: 95, a: 0.82 },
+    { layer: 36, r: 10, g: 10, b: 26, a: 0.96 },
+    { layer: 38, r: 12, g: 11, b: 28, a: 0.94 },
+    { layer: 40, r: 35, g: 24, b: 45, a: 0.78 }
 ];
 
 function drawSkyMoodTint() {
@@ -6285,7 +6287,9 @@ function drawSkyMoodTint() {
     const canvasHeight = getCanvasHeight();
 
     context.save();
-    context.fillStyle = `rgba(${r.toFixed(0)},${g.toFixed(0)},${b.toFixed(0)},${a})`;
+    context.globalCompositeOperation = "multiply";
+    context.globalAlpha = a;
+    context.fillStyle = `rgb(${r.toFixed(0)},${g.toFixed(0)},${b.toFixed(0)})`;
     context.fillRect(0, 0, canvasWidth, canvasHeight);
     context.restore();
 }
@@ -8003,3 +8007,151 @@ function drawLayer40Finale() {
 
 // Layer 40のデータを作成
 createLayer40Finale();
+
+// ============================================================
+// Layer 40 追加演出 — 花火が打ち上がる
+// ============================================================
+
+const fireworkColorPalette = [
+    [255, 120, 140],
+    [255, 210, 110],
+    [140, 220, 255],
+    [180, 255, 160],
+    [230, 160, 255],
+    [255, 255, 255]
+];
+
+const layer40Fireworks = [];
+
+function spawnFirework(initialDelay) {
+    return {
+        state: "waiting",
+        timer: initialDelay,
+        x: 0,
+        y: 0,
+        targetY: 0,
+        color: fireworkColorPalette[0],
+        particles: []
+    };
+}
+
+function createLayer40Fireworks() {
+    layer40Fireworks.length = 0;
+
+    for (let i = 0; i < 4; i += 1) {
+        layer40Fireworks.push(
+            spawnFirework(Math.floor(Math.random() * 90))
+        );
+    }
+}
+
+function drawLayer40Fireworks() {
+    if (currentLayer < 38) {
+        return;
+    }
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    context.save();
+    context.globalCompositeOperation = "screen";
+
+    for (const firework of layer40Fireworks) {
+        if (firework.state === "waiting") {
+            firework.timer -= 1;
+
+            if (firework.timer <= 0) {
+                firework.state = "rising";
+                firework.x = canvasWidth * (0.15 + Math.random() * 0.7);
+                firework.y = canvasHeight * 0.98;
+                firework.targetY =
+                    canvasHeight * (0.15 + Math.random() * 0.25);
+                firework.color =
+                    fireworkColorPalette[
+                        Math.floor(Math.random() * fireworkColorPalette.length)
+                    ];
+            }
+
+            continue;
+        }
+
+        if (firework.state === "rising") {
+            firework.y -= 5.5;
+
+            const [r, g, b] = firework.color;
+
+            context.strokeStyle = `rgba(${r},${g},${b},0.85)`;
+            context.lineWidth = 1.6;
+            context.lineCap = "round";
+
+            context.beginPath();
+            context.moveTo(firework.x, firework.y);
+            context.lineTo(firework.x, firework.y + 14);
+            context.stroke();
+
+            if (firework.y <= firework.targetY) {
+                firework.state = "exploding";
+                firework.particles = [];
+
+                const count = 34 + Math.floor(Math.random() * 18);
+
+                for (let p = 0; p < count; p += 1) {
+                    const angle =
+                        (Math.PI * 2 * p) / count + Math.random() * 0.2;
+                    const speed = 1.6 + Math.random() * 2.4;
+
+                    firework.particles.push({
+                        x: firework.x,
+                        y: firework.y,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed,
+                        life: 0,
+                        maxLife: 45 + Math.random() * 25
+                    });
+                }
+            }
+
+            continue;
+        }
+
+        if (firework.state === "exploding") {
+            const [r, g, b] = firework.color;
+            let aliveCount = 0;
+
+            for (const particle of firework.particles) {
+                particle.life += 1;
+
+                if (particle.life >= particle.maxLife) {
+                    continue;
+                }
+
+                aliveCount += 1;
+
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+                particle.vy += 0.03;
+                particle.vx *= 0.985;
+
+                const fade = 1 - particle.life / particle.maxLife;
+
+                context.fillStyle = `rgba(${r},${g},${b},${fade})`;
+                context.shadowColor = `rgba(${r},${g},${b},0.9)`;
+                context.shadowBlur = 6;
+
+                context.beginPath();
+                context.arc(particle.x, particle.y, 1.6, 0, Math.PI * 2);
+                context.fill();
+            }
+
+            if (aliveCount === 0) {
+                firework.state = "waiting";
+                firework.timer = Math.floor(50 + Math.random() * 110);
+            }
+        }
+    }
+
+    context.restore();
+}
+
+// 花火のデータを作成
+createLayer40Fireworks();
