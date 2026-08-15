@@ -1528,6 +1528,8 @@ function animate() {
   drawLayer19Trees();
   drawLayer20Atmosphere();
 
+  drawSkyMoodTint();
+
   drawLayer21WildFlowers();
   drawLayer22DenseTrees();
   drawLayer23Mushrooms();
@@ -6238,6 +6240,57 @@ function drawLayer20MistGlow(
 createLayer20Atmosphere();
 
 // ============================================================
+// 空と世界全体の色味の移り変わり(Layer 25〜40)
+// ============================================================
+
+const skyMoodKeyframes = [
+    { layer: 24, r: 255, g: 255, b: 255, a: 0 },
+    { layer: 27, r: 255, g: 175, b: 110, a: 0.14 },
+    { layer: 30, r: 255, g: 140, b: 95, a: 0.22 },
+    { layer: 33, r: 150, g: 95, b: 150, a: 0.34 },
+    { layer: 35, r: 70, g: 60, b: 120, a: 0.46 },
+    { layer: 37, r: 28, g: 30, b: 70, a: 0.58 },
+    { layer: 39, r: 255, g: 195, b: 140, a: 0.3 },
+    { layer: 40, r: 255, g: 230, b: 185, a: 0.14 }
+];
+
+function drawSkyMoodTint() {
+    if (currentLayer < 25) {
+        return;
+    }
+
+    let lower = skyMoodKeyframes[0];
+    let upper = skyMoodKeyframes[skyMoodKeyframes.length - 1];
+
+    for (let i = 0; i < skyMoodKeyframes.length - 1; i += 1) {
+        if (
+            currentLayer >= skyMoodKeyframes[i].layer &&
+            currentLayer <= skyMoodKeyframes[i + 1].layer
+        ) {
+            lower = skyMoodKeyframes[i];
+            upper = skyMoodKeyframes[i + 1];
+            break;
+        }
+    }
+
+    const span = upper.layer - lower.layer || 1;
+    const t = clamp((currentLayer - lower.layer) / span, 0, 1);
+
+    const r = lower.r + (upper.r - lower.r) * t;
+    const g = lower.g + (upper.g - lower.g) * t;
+    const b = lower.b + (upper.b - lower.b) * t;
+    const a = lower.a + (upper.a - lower.a) * t;
+
+    const canvasWidth = getCanvasWidth();
+    const canvasHeight = getCanvasHeight();
+
+    context.save();
+    context.fillStyle = `rgba(${r.toFixed(0)},${g.toFixed(0)},${b.toFixed(0)},${a})`;
+    context.fillRect(0, 0, canvasWidth, canvasHeight);
+    context.restore();
+}
+
+// ============================================================
 // Layer 21 — 丈の高い野花が咲く
 // ============================================================
 
@@ -6789,7 +6842,7 @@ function createLayer26CloudShadows() {
             speed: 0.06 + Math.random() * 0.1,
 
             opacity: 0,
-            targetOpacity: 0.05 + Math.random() * 0.06,
+            targetOpacity: 0.16 + Math.random() * 0.16,
             appearSpeed: 0.006 + Math.random() * 0.006,
 
             delay: Math.floor(Math.random() * 40),
@@ -7351,7 +7404,7 @@ function drawLayer32Aurora() {
         context.closePath();
 
         const [r, g, b] = band.color;
-        context.fillStyle = `rgba(${r},${g},${b},0.06)`;
+        context.fillStyle = `rgba(${r},${g},${b},0.16)`;
         context.fill();
     }
 
@@ -7386,7 +7439,7 @@ function drawLayer33GlowingTrees() {
             glowX, glowY, glowRadius
         );
 
-        gradient.addColorStop(0, `rgba(255,240,170,${tree.opacity * 0.22})`);
+        gradient.addColorStop(0, `rgba(255,240,170,${tree.opacity * 0.4})`);
         gradient.addColorStop(1, "rgba(255,240,170,0)");
 
         context.fillStyle = gradient;
@@ -7512,7 +7565,7 @@ function drawLayer35ForestLife() {
         canvasWidth * 0.5, canvasHeight * 0.6, canvasWidth * 0.55
     );
 
-    gradient.addColorStop(0, `rgba(150,255,160,${0.05 * pulse})`);
+    gradient.addColorStop(0, `rgba(150,255,160,${0.14 * pulse})`);
     gradient.addColorStop(1, "rgba(150,255,160,0)");
 
     context.fillStyle = gradient;
@@ -7541,7 +7594,7 @@ function createLayer36Blessing() {
             speed: 0.006 + Math.random() * 0.01,
 
             opacity: 0,
-            targetOpacity: 0.06 + Math.random() * 0.08,
+            targetOpacity: 0.16 + Math.random() * 0.16,
             appearSpeed: 0.004 + Math.random() * 0.006,
 
             delay: Math.floor(Math.random() * 40),
@@ -7699,7 +7752,7 @@ function createLayer38GoldMist() {
             speed: 0.04 + Math.random() * 0.06,
 
             opacity: 0,
-            targetOpacity: 0.03 + Math.random() * 0.04,
+            targetOpacity: 0.1 + Math.random() * 0.1,
             appearSpeed: 0.003 + Math.random() * 0.004,
 
             delay: Math.floor(Math.random() * 40),
